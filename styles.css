@@ -15,21 +15,41 @@ body {
   line-height: 1.6;
 }
 
-/* Header & Navegación Desplegable */
-header {
+/* Header & Barra Superior Estilo TodoCuadros */
+.main-header {
   background: #ffffff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
   position: sticky;
   top: 0;
   z-index: 100;
-  padding: 1rem 1.2rem;
+  padding: 0.8rem 1.2rem;
 }
 
-.header-top {
+.header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.menu-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #0f172a;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.menu-toggle-btn:hover {
+  background: #f1f5f9;
 }
 
 .logo {
@@ -43,49 +63,137 @@ header {
   color: #d97706;
 }
 
-/* Botón menú hamburguesa (visible solo en móviles) */
-.menu-toggle {
-  display: block;
+.header-phone-btn {
+  color: #25d366;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+/* Overlay de Fondo */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.6);
+  z-index: 200;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Menú Lateral Desplegable (Side Drawer) */
+.side-drawer {
+  position: fixed;
+  top: 0;
+  left: -300px;
+  width: 280px;
+  height: 100%;
+  background: #ffffff;
+  z-index: 300;
+  box-shadow: 4px 0 15px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  transition: left 0.3s ease;
+}
+
+.side-drawer.open {
+  left: 0;
+}
+
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem;
+  background: #0f172a;
+  color: #ffffff;
+}
+
+.drawer-title {
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.drawer-close-btn {
   background: transparent;
   border: none;
-  font-size: 1.5rem;
-  color: #0f172a;
+  color: #cbd5e1;
+  font-weight: 600;
+  font-size: 0.85rem;
   cursor: pointer;
-  padding: 0.2rem 0.5rem;
-}
-
-/* Menú de navegación en móviles */
-nav {
-  display: none; /* Oculto por defecto en móvil */
-  flex-direction: column;
-  width: 100%;
-  gap: 0.8rem;
-  padding-top: 1rem;
-  margin-top: 0.8rem;
-  border-top: 1px solid #f1f5f9;
-}
-
-/* Estado activo del menú (cuando se hace clic) */
-nav.active {
   display: flex;
+  align-items: center;
+  gap: 0.3rem;
 }
 
-nav a {
+.drawer-close-btn:hover {
+  color: #ffffff;
+}
+
+.drawer-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.drawer-menu li {
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.drawer-link {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem 1.2rem;
   text-decoration: none;
   color: #334155;
   font-weight: 600;
   font-size: 0.95rem;
-  padding: 0.5rem 0;
+  transition: background 0.2s, color 0.2s;
+}
+
+.drawer-link i {
+  color: #d97706;
+  width: 18px;
   text-align: center;
 }
 
-nav .btn-nav {
-  background: #0284c7;
+.drawer-link:hover {
+  background: #f8fafc;
+  color: #d97706;
+}
+
+.drawer-footer {
+  padding: 1.2rem;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+}
+
+.btn-drawer-quote {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #25d366;
   color: #ffffff;
-  padding: 0.6rem 1.2rem;
-  border-radius: 20px;
-  display: inline-block;
-  margin-top: 0.3rem;
+  text-decoration: none;
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-align: center;
 }
 
 /* Hero Section */
@@ -329,7 +437,7 @@ nav .btn-nav {
   line-height: 1.5;
 }
 
-/* Sección Beneficios */
+/* Beneficios */
 .beneficios {
   background: #f8fafc;
   padding: 3.5rem 1.2rem;
@@ -402,7 +510,7 @@ nav .btn-nav {
   line-height: 1.5;
 }
 
-/* Sección Contacto Directo */
+/* Contacto */
 .contacto-directo-section {
   background: #0f172a;
   color: #ffffff;
@@ -536,43 +644,6 @@ footer {
 }
 
 @media (min-width: 768px) {
-  /* En pantallas de computadora, ocultamos el botón hamburguesa */
-  .menu-toggle {
-    display: none;
-  }
-
-  /* Mostramos el menú horizontal normal */
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 1.5rem;
-  }
-
-  .header-top {
-    width: auto;
-  }
-
-  nav {
-    display: flex !important;
-    flex-direction: row;
-    width: auto;
-    gap: 1rem;
-    padding-top: 0;
-    margin-top: 0;
-    border-top: none;
-  }
-
-  nav a {
-    font-size: 0.95rem;
-    padding: 0;
-  }
-
-  nav .btn-nav {
-    padding: 0.4rem 0.9rem;
-    margin-top: 0;
-  }
-
   .hero {
     padding: 9rem 1.5rem;
     min-height: 70vh;
