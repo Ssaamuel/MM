@@ -15,7 +15,7 @@ body {
   line-height: 1.6;
 }
 
-/* Header */
+/* Header Base */
 header {
   display: flex;
   justify-content: space-between;
@@ -39,20 +39,38 @@ header {
   color: #d97706;
 }
 
-nav {
+/* Controles del menú ocultos por defecto */
+.menu-checkbox {
+  display: none;
+}
+
+.menu-btn, .close-btn {
+  display: none;
+  font-size: 1.5rem;
+  color: #0f172a;
+  cursor: pointer;
+}
+
+/* Navegación Desktop */
+.nav-drawer {
+  display: flex;
+  align-items: center;
+}
+
+.drawer-links {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-nav a {
+.drawer-links a {
   text-decoration: none;
   color: #334155;
   font-weight: 600;
   font-size: 0.95rem;
 }
 
-nav .btn-nav {
+.drawer-links .btn-nav {
   background: #0284c7;
   color: #ffffff;
   padding: 0.4rem 0.9rem;
@@ -492,7 +510,7 @@ footer {
   font-size: 0.85rem;
 }
 
-/* Media Queries para Computadora y Pantallas Grandes */
+/* Media Queries Responsivos para Pantallas Mayores */
 @media (min-width: 640px) {
   .contacto-card {
     width: calc(33.333% - 1.2rem);
@@ -532,54 +550,88 @@ footer {
 }
 
 /* ==========================================================
-   BARRA DESLIZABLE EXCLUSIVA PARA TELÉFONOS (todocuadros.com.mx)
+   MENÚ LATERAL TIPO TODOCUADROS.COM.MX (SOLO PARA TELÉFONOS)
    ========================================================== */
 @media screen and (max-width: 767px) {
   
-  /* Convierte los contenedores en filas horizontales deslizables */
-  .servicios-grid,
-  .beneficios-grid,
-  .contacto-cards-grid {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    overflow-x: auto !important;
-    scroll-snap-type: x mandatory !important;
-    -webkit-overflow-scrolling: touch !important;
-    padding: 0.5rem 1rem 1.5rem 1rem !important;
-    gap: 1rem !important;
-    justify-content: flex-start !important;
+  /* Mostrar Botones de Control */
+  .menu-btn, .close-btn {
+    display: block;
   }
 
-  /* Ajusta el ancho de tarjeta a 78% para mostrar parte de la siguiente */
-  .servicios-grid .card,
-  .beneficios-grid .beneficio-card,
-  .contacto-cards-grid .contacto-card {
-    flex: 0 0 78% !important;
-    width: 78% !important;
-    min-width: 78% !important;
-    max-width: 78% !important;
-    scroll-snap-align: start !important;
+  /* Transformar la navegación en un menú lateral fijo */
+  .nav-drawer {
+    position: fixed;
+    top: 0;
+    left: -85%; /* Oculto fuera de la pantalla */
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background-color: #ffffff;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1.2rem;
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.15);
+    transition: left 0.3s ease-in-out;
+    overflow-y: auto;
   }
 
-  /* Indicador sutil de barra de desplazamiento en la parte inferior */
-  .servicios-grid::-webkit-scrollbar,
-  .beneficios-grid::-webkit-scrollbar,
-  .contacto-cards-grid::-webkit-scrollbar {
-    height: 4px !important;
-    display: block !important;
+  /* Botón de Cierre 'X' a la izquierda */
+  .drawer-header {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
   }
 
-  .servicios-grid::-webkit-scrollbar-track,
-  .beneficios-grid::-webkit-scrollbar-track,
-  .contacto-cards-grid::-webkit-scrollbar-track {
-    background: #e2e8f0 !important;
-    border-radius: 4px !important;
+  /* Lista de Enlaces en Líneas separadas por bordes finos */
+  .drawer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
 
-  .servicios-grid::-webkit-scrollbar-thumb,
-  .beneficios-grid::-webkit-scrollbar-thumb,
-  .contacto-cards-grid::-webkit-scrollbar-thumb {
-    background: #d97706 !important;
-    border-radius: 4px !important;
+  .drawer-links a {
+    color: #1d4ed8; /* Azul idéntico al de Todocuadros */
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid #e2e8f0;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .drawer-links a:last-child {
+    border-bottom: none;
+  }
+
+  .drawer-links .btn-nav {
+    background: transparent;
+    color: #1d4ed8;
+    padding: 1.1rem 0;
+    border-radius: 0;
+  }
+
+  /* Fondo gris oscuro con opacidad */
+  .drawer-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+  }
+
+  /* LÓGICA DE APERTURA AL ACTIVAR EL CHECKBOX */
+  .menu-checkbox:checked ~ .nav-drawer {
+    left: 0; /* Muestra el menú deslizándolo a la pantalla */
+  }
+
+  .menu-checkbox:checked ~ .drawer-overlay {
+    display: block; /* Muestra la sombra oscura de fondo */
   }
 }
