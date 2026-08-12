@@ -274,7 +274,6 @@ nav .btn-nav {
   flex-grow: 1;
 }
 
-/* Ajuste directo para eliminar círculos/fondos y alinear íconos */
 .card-icon {
   font-size: 1.8rem;
   color: #d97706 !important;
@@ -301,7 +300,7 @@ nav .btn-nav {
   line-height: 1.5;
 }
 
-/* Sección Beneficios (Flexbox Centrado) */
+/* Sección Beneficios */
 .beneficios {
   background: #f8fafc;
   padding: 5rem 1.5rem;
@@ -374,7 +373,7 @@ nav .btn-nav {
   line-height: 1.5;
 }
 
-/* Sección Contacto Directo (Compacta y Centrada) */
+/* Sección Contacto Directo */
 .contacto-directo-section {
   background: #0f172a;
   color: #ffffff;
@@ -466,15 +465,6 @@ nav .btn-nav {
   color: #d97706;
 }
 
-/* Responsivo para alinear y centrar las 3 tarjetas */
-@media (min-width: 640px) {
-  .contacto-card {
-    width: calc(33.333% - 1.2rem);
-    min-width: 220px;
-    max-width: 280px;
-  }
-}
-
 /* WhatsApp Flotante */
 .whatsapp-float {
   position: fixed;
@@ -502,10 +492,12 @@ footer {
   font-size: 0.85rem;
 }
 
-/* Media Queries Responsivos */
+/* Media Queries para Computadora y Pantallas Grandes */
 @media (min-width: 640px) {
-  .contacto-cards-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .contacto-card {
+    width: calc(33.333% - 1.2rem);
+    min-width: 220px;
+    max-width: 280px;
   }
 }
 
@@ -537,41 +529,57 @@ footer {
   .beneficio-card {
     width: calc(33.333% - 1.5rem);
   }
-  .contacto-cards-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
 }
-/* Carrusel / Barra deslizable exclusiva para teléfonos */
-@media (max-width: 767px) {
-  /* 1. Activar desplazamiento horizontal */
+
+/* ==========================================================
+   BARRA DESLIZABLE EXCLUSIVA PARA TELÉFONOS (todocuadros.com.mx)
+   ========================================================== */
+@media screen and (max-width: 767px) {
+  
+  /* Convierte los contenedores en filas horizontales deslizables */
   .servicios-grid,
-  .beneficios-grid {
+  .beneficios-grid,
+  .contacto-cards-grid {
     display: flex !important;
+    flex-wrap: nowrap !important;
     overflow-x: auto !important;
     scroll-snap-type: x mandatory !important;
-    -webkit-overflow-scrolling: touch;
+    -webkit-overflow-scrolling: touch !important;
     padding: 0.5rem 1rem 1.5rem 1rem !important;
-    margin-left: -1.5rem !important;
-    margin-right: -1.5rem !important;
     gap: 1rem !important;
+    justify-content: flex-start !important;
   }
 
-  /* 2. Ocultar la barra de desplazamiento estética */
-  .servicios-grid::-webkit-scrollbar,
-  .beneficios-grid::-webkit-scrollbar {
-    display: none;
-  }
-  .servicios-grid,
-  .beneficios-grid {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  /* 3. Definir ancho de cada tarjeta */
+  /* Ajusta el ancho de tarjeta a 78% para mostrar parte de la siguiente */
   .servicios-grid .card,
-  .beneficios-grid .beneficio-card {
-    flex: 0 0 82% !important;
-    max-width: 82% !important;
-    scroll-snap-align: center !important;
+  .beneficios-grid .beneficio-card,
+  .contacto-cards-grid .contacto-card {
+    flex: 0 0 78% !important;
+    width: 78% !important;
+    min-width: 78% !important;
+    max-width: 78% !important;
+    scroll-snap-align: start !important;
+  }
+
+  /* Indicador sutil de barra de desplazamiento en la parte inferior */
+  .servicios-grid::-webkit-scrollbar,
+  .beneficios-grid::-webkit-scrollbar,
+  .contacto-cards-grid::-webkit-scrollbar {
+    height: 4px !important;
+    display: block !important;
+  }
+
+  .servicios-grid::-webkit-scrollbar-track,
+  .beneficios-grid::-webkit-scrollbar-track,
+  .contacto-cards-grid::-webkit-scrollbar-track {
+    background: #e2e8f0 !important;
+    border-radius: 4px !important;
+  }
+
+  .servicios-grid::-webkit-scrollbar-thumb,
+  .beneficios-grid::-webkit-scrollbar-thumb,
+  .contacto-cards-grid::-webkit-scrollbar-thumb {
+    background: #d97706 !important;
+    border-radius: 4px !important;
   }
 }
