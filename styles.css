@@ -59,10 +59,10 @@ nav .btn-nav {
   border-radius: 20px;
 }
 
-/* Hero Section */
+/* Hero Section con la URL corregida */
 .hero {
   background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), 
-              url('https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=1600&q=80') center/cover;
+              url("https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=1600&q=80") center/cover;
   color: #ffffff;
   text-align: center;
   padding: 7rem 1.5rem;
