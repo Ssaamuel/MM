@@ -541,3 +541,50 @@ footer {
     grid-template-columns: repeat(4, 1fr);
   }
 }
+/* Ajustes para el Menú en Celulares */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  background: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+}
+
+.logo {
+  font-weight: 900;
+  font-size: 1.2rem;
+  color: #0f172a;
+}
+
+.logo span {
+  color: #d97706;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Ocultar los enlaces de texto solo en celulares para que no se amontonen */
+@media (max-width: 767px) {
+  nav a:not(.btn-nav) {
+    display: none;
+  }
+}
+
+nav .btn-nav {
+  background: #0284c7;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
