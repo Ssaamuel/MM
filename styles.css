@@ -541,3 +541,37 @@ footer {
     grid-template-columns: repeat(4, 1fr);
   }
 }
+/* Carrusel / Barra deslizable exclusiva para teléfonos */
+@media (max-width: 767px) {
+  /* 1. Activar desplazamiento horizontal */
+  .servicios-grid,
+  .beneficios-grid {
+    display: flex !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.5rem 1rem 1.5rem 1rem !important;
+    margin-left: -1.5rem !important;
+    margin-right: -1.5rem !important;
+    gap: 1rem !important;
+  }
+
+  /* 2. Ocultar la barra de desplazamiento estética */
+  .servicios-grid::-webkit-scrollbar,
+  .beneficios-grid::-webkit-scrollbar {
+    display: none;
+  }
+  .servicios-grid,
+  .beneficios-grid {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* 3. Definir ancho de cada tarjeta */
+  .servicios-grid .card,
+  .beneficios-grid .beneficio-card {
+    flex: 0 0 82% !important;
+    max-width: 82% !important;
+    scroll-snap-align: center !important;
+  }
+}
